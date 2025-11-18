@@ -1,0 +1,52 @@
+/* Theme CSS for dark mode support */
+
+:root {
+    --bg-color: #F1F7F7;
+    --text-color: #333;
+    --navbar-bg: #5D6B6B;
+    --card-bg: #ffffff;
+    --link-color: #0d6efd;
+    --border-color: #dee2e6;
+}
+
+/* Dark mode variables */
+.dark-mode {
+    --bg-color: #1a202c;
+    --text-color: #E1E1E1;
+    --navbar-bg: #2D3748;
+    --card-bg: #2d3748;
+    --link-color: #63b3ed;
+    --border-color: #4A5568;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+a {
+    color: var(--link-color);
+}
+
+/* Dark mode toggle button - if you want to add one to the navbar */
+.theme-toggle {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

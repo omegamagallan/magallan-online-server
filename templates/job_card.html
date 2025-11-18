@@ -1,0 +1,661 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ t.site_title }}{% endblock %}
+
+{% block styles %}
+<style>
+    /* Professional Job Card Styling - Colors from index.html */
+    :root {
+        --primary-color: #5D6B6B;
+        --secondary-color: #F7CBCA;
+        --accent-color: #D5E5E5;
+        --grey-accent: #7f8c8d;
+        --navbar-bg: #F7CBCA;
+        --text-dark: #333;
+        --text-light: #7f8c8d;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --bg-color: #F1F7F7;
+        --card-bg: #f8f9fa;
+    }
+
+    .dark-mode {
+        --primary-color: #4A5568;
+        --secondary-color: #F7CBCA;
+        --accent-color: #28a745; /* Green accent in dark mode */
+        --grey-accent: #95a5a6;
+        --navbar-bg: #2D3748;
+        --text-dark: #F7FAFC;
+        --text-light: #CBD5E0;
+        --bg-color: #121212;
+        --card-bg: #1A202C;
+    }
+    
+    body {
+        background-color: var(--bg-color);
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: var(--primary-color);
+        color: white;
+        padding: 4rem 0;
+        margin-bottom: 2rem;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .profile-photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        object-fit: cover;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        font-weight: 400;
+        opacity: 0.95;
+        margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+        opacity: 0.9;
+        font-style: italic;
+    }
+
+    /* Contact Info */
+    .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: translateY(-3px);
+        color: white;
+    }
+
+    .contact-item i {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    /* Section Styling */
+    .section-card {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid var(--secondary-color);
+        display: flex;
+        align-items: center;
+    }
+    
+    .dark-mode .section-title {
+        color: #E2E8F0;
+    }
+
+    .section-title i {
+        margin-right: 0.75rem;
+        font-size: 1.5rem;
+    }
+
+    /* Skills Section - Tag-based display */
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .skill-category {
+        flex: 1 1 calc(50% - 0.5rem);
+        min-width: 250px;
+    }
+    
+    .skill-category-title {
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .dark-mode .skill-category-title {
+        color: #E2E8F0;
+    }
+    
+    .skill-category-title i {
+        margin-right: 0.5rem;
+        color: var(--accent-color);
+    }
+    
+    .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .skill-tag {
+        background: var(--secondary-color);
+        color: #212529;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skill-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .dark-mode .skill-tag {
+        background: var(--grey-accent);
+        color: #F7FAFC;
+    }
+    
+    .dark-mode .skill-tag:hover {
+        background: var(--accent-color);
+        color: white;
+    }
+
+    /* Experience Timeline */
+    .experience-item {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 2rem;
+        border-left: 3px solid var(--secondary-color);
+    }
+
+    .experience-item::before {
+        content: '';
+        position: absolute;
+        left: -8px;
+        top: 0;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: var(--secondary-color);
+        border: 3px solid var(--card-bg);
+    }
+
+    .experience-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.25rem;
+    }
+
+    .experience-company {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    
+    .dark-mode .experience-company {
+        color: #68D391;
+    }
+
+    .experience-period {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .experience-description {
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .achievement-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .achievement-list li {
+        padding-left: 1.5rem;
+        position: relative;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+    }
+
+    .achievement-list li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: var(--secondary-color);
+        font-weight: 700;
+    }
+
+    /* Project Cards */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        background: var(--accent-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.75rem;
+    }
+    
+    .dark-mode .project-name {
+        color: #F7FAFC;
+    }
+
+    .project-description {
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+        background: var(--grey-accent);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    .dark-mode .tech-tag {
+        background: var(--grey-accent);
+    }
+
+    .project-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+
+    .project-link:hover {
+        color: var(--secondary-color);
+    }
+
+    .project-link i {
+        margin-left: 0.5rem;
+    }
+
+    /* Social Links */
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.5rem;
+        text-decoration: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .social-link:hover {
+        transform: scale(1.1);
+        background: var(--secondary-color);
+        color: white;
+    }
+
+    /* Download CV Button */
+    .download-cv {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .download-cv:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .download-cv i {
+        margin-right: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .section-card {
+            padding: 1.5rem;
+        }
+
+        .contact-info {
+            gap: 1rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-in {
+        animation: fadeInUp 0.6s ease-out;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center animate-in">
+    <div class="container">
+        <!-- Optional: Add your profile photo -->
+        <!-- <img src="/static/images/profile.jpg" alt="{{ t.profile.name }}" class="profile-photo"> -->
+        <h1 class="hero-title">{{ t.profile.name }}</h1>
+        <p class="hero-subtitle">{{ t.profile.title }}</p>
+        <p class="hero-tagline">{{ t.profile.tagline }}</p>
+        
+        <div class="contact-info">
+            <a href="mailto:{{ t.profile.email }}" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>{{ t.profile.email }}</span>
+            </a>
+            <a href="tel:{{ t.profile.phone }}" class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>{{ t.profile.phone }}</span>
+            </a>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ t.profile.location }}</span>
+            </div>
+            <a href="https://t.me/{{ t.profile.telegram[1:] }}" target="_blank" class="contact-item">
+                <i class="fab fa-telegram"></i>
+                <span>{{ t.profile.telegram }}</span>
+            </a>
+            {% if t.profile.hh_url %}
+            <a href="{{ t.profile.hh_url }}" target="_blank" class="contact-item">
+                <i class="fas fa-briefcase"></i>
+                <span>hh.ru</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- About Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-user"></i>
+            {{ t.profile.about_title }}
+        </h2>
+        <p style="color: var(--text-dark); line-height: 1.8;">{{ t.profile.about }}</p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-code"></i>
+            {{ t.profile.skills_title }}
+        </h2>
+        <div class="skills-container">
+            {% set categories = {} %}
+            {% for skill in t.profile.skills %}
+                {% set category = skill.category %}
+                {% if category not in categories %}
+                    {% set _ = categories.update({category: []}) %}
+                {% endif %}
+                {% set _ = categories[category].append(skill.name) %}
+            {% endfor %}
+            
+            {% for category, skills in categories.items() %}
+            <div class="skill-category">
+                <div class="skill-category-title">
+                    <i class="fas fa-chevron-right"></i>
+                    {{ category }}
+                </div>
+                <div class="skill-tags">
+                    {% for skill_name in skills %}
+                    <span class="skill-tag">{{ skill_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-briefcase"></i>
+            {{ t.profile.experience_title }}
+        </h2>
+        {% for exp in t.profile.experience %}
+        <div class="experience-item">
+            <div class="experience-title">{{ exp.title }}</div>
+            <div class="experience-company">{{ exp.company }}</div>
+            <div class="experience-period">{{ exp.period }} <span style="color: var(--text-light); font-style: italic;">({{ exp.duration }})</span></div>
+            <p class="experience-description">{{ exp.description }}</p>
+            {% if exp.achievements %}
+            <ul class="achievement-list">
+                {% for achievement in exp.achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Education Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-graduation-cap"></i>
+            {{ t.profile.education_title }}
+        </h2>
+        {% for edu in t.profile.education %}
+        <div class="experience-item">
+            <div class="experience-title">{{ edu.degree }}</div>
+            <div class="experience-company">{{ edu.institution }}</div>
+            <div class="experience-period">{{ edu.period }}</div>
+            <p class="experience-description">{{ edu.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Languages Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-language"></i>
+            {{ t.profile.languages_title }}
+        </h2>
+        <div class="row">
+            {% for language in t.profile.languages %}
+            <div class="col-md-6 mb-3">
+                <div class="language-item">
+                    <strong style="color: var(--text-dark);">{{ language.name }}</strong>
+                    <span style="color: var(--text-light);"> — {{ language.level }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="section-card animate-in">
+        <h2 class="section-title">
+            <i class="fas fa-project-diagram"></i>
+            {{ t.profile.projects_title }}
+        </h2>
+        <div class="projects-grid">
+            {% for project in t.profile.projects %}
+            <div class="project-card">
+                <div class="project-name">{{ project.name }}</div>
+                <p class="project-description">{{ project.description }}</p>
+                <div class="tech-tags">
+                    {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% if project.link %}
+                <a href="{{ project.link }}" target="_blank" class="project-link">
+                    {{ 'View Project' if lang == 'en' else 'Посмотреть проект' }} <i class="fas fa-external-link-alt"></i>
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Social Links Section -->
+    <div class="section-card animate-in text-center">
+        <h2 class="section-title justify-content-center">
+            <i class="fas fa-share-alt"></i>
+            {{ t.profile.social_title }}
+        </h2>
+        <div class="social-links">
+            {% if t.social.github %}
+            <a href="https://github.com/{{ t.social.github }}" target="_blank" class="social-link" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            {% endif %}
+            {% if t.social.telegram %}
+            <a href="https://t.me/{{ t.social.telegram[1:] }}" target="_blank" class="social-link" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            {% endif %}
+            {% if t.social.website %}
+            <a href="{{ t.social.website }}" target="_blank" class="social-link" title="Website">
+                <i class="fas fa-globe"></i>
+            </a>
+            {% endif %}
+            {% if t.profile.hh_url %}
+            <a href="{{ t.profile.hh_url }}" target="_blank" class="social-link" title="hh.ru">
+                <i class="fas fa-briefcase"></i>
+            </a>
+            {% endif %}
+        </div>
+        
+        <!-- Optional: Download CV Button -->
+        <!-- <div class="mt-4">
+            <a href="/static/cv.pdf" download class="download-cv">
+                <i class="fas fa-download"></i>
+                {{ t.download_cv }}
+            </a>
+        </div> -->
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Animate sections on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.section-card').forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

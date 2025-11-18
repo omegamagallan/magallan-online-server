@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build: .
+    container_name: magallan-portfolio
+    restart: unless-stopped
+    ports:
+      - "8002:8000"  # Adjust the external port as needed for your nginx config
+    volumes:
+      # Mount local directories for easy development and updates
+      - ./templates:/app/templates
+      - ./static:/app/static
+      - ./translations:/app/translations
+      - ./main.py:/app/main.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - web
+
+networks:
+  web:
+    external: false

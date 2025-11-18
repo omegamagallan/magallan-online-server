@@ -1,0 +1,99 @@
+{
+  "site_title": "Portfolio - Magallan Alekseeva",
+  "portfolio": "Portfolio",
+  "home": "Home",
+  "dark_mode": "Dark Mode",
+  "light_mode": "Light Mode",
+  "download_cv": "Download CV",
+  "profile": {
+    "name": "Magallan Alekseeva",
+    "title": "Python Backend Developer & DevOps Engineer",
+    "tagline": "Designing microservice architectures and building scalable systems",
+    "email": "guardlappland.work@gmail.com",
+    "phone": "+7 (925) 172-75-72",
+    "location": "Moscow, Russia",
+    "telegram": "@omegamagallan",
+    "hh_url": "https://hh.ru/resume/87045ce5ff0fab677f0039ed1f306257476356?hhtmFrom=resume_list",
+    "about_title": "About Me",
+    "about": "Backend developer and DevOps engineer with experience in designing microservice architectures. I quickly grasp new technologies, pay attention to code quality, and am ready for challenging tasks. In my free time, I explore new technologies and develop my own projects.",
+    "skills_title": "Technical Skills",
+    "skills": [
+      {"name": "Python", "category": "Languages"},
+      {"name": "FastAPI", "category": "Frameworks"},
+      {"name": "REST API", "category": "Web"},
+      {"name": "HTTPX", "category": "Web"},
+      {"name": "PostgreSQL", "category": "Databases"},
+      {"name": "SQLAlchemy", "category": "Databases"},
+      {"name": "SQL", "category": "Databases"},
+      {"name": "Apache Kafka", "category": "Message Brokers"},
+      {"name": "Docker", "category": "DevOps"},
+      {"name": "Docker Compose", "category": "DevOps"},
+      {"name": "Git", "category": "Tools"},
+      {"name": "GitLab", "category": "Tools"},
+      {"name": "Bash", "category": "Scripting"},
+      {"name": "Nginx", "category": "Infrastructure"},
+      {"name": "Linux", "category": "OS"},
+      {"name": "Jira", "category": "Tools"},
+      {"name": "Agile", "category": "Methodologies"}
+    ],
+    "experience_title": "Work Experience",
+    "experience": [
+      {
+        "title": "Python Developer",
+        "company": "LLC \"Melofon\"",
+        "period": "July 2024 — August 2025",
+        "duration": "1 year 2 months",
+        "description": "Development of microservices for a Telegram bot platform based on Python/FastAPI with Pydantic for data validation; design and implementation of REST API with external system integration (requests/httpx).",
+        "achievements": [
+          "Designed and implemented a complete microservice architecture for the platform using Kafka for asynchronous interaction between services",
+          "Developed a CRM system on FastAPI with Pydantic for strict typing and data validation, enabling centralized management of bot creation, editing, and configuration; improved team workflow efficiency",
+          "Optimized system performance: implemented asynchronous request processing (asyncio), optimized SQL queries and PostgreSQL schemas",
+          "Set up DevOps processes: automated deployment through Docker and GitLab CI/CD, configured Nginx for secure communication",
+          "Mentored and managed a small development team: coordinated tasks, conducted code reviews in GitLab, refactored code, monitored deadlines, and managed releases",
+          "Documented architecture and decisions in the project's local MediaWiki"
+        ]
+      }
+    ],
+    "education_title": "Education",
+    "education": [
+      {
+        "degree": "Bachelor's Degree in Computer Science and Engineering",
+        "institution": "A.N. Kosygin Russian State University (Technologies. Design. Art), Moscow",
+        "period": "2022 — 2027",
+        "description": "Institute of Information Technologies and Digital Transformation, 3rd year (distance learning)"
+      },
+      {
+        "degree": "Industrial Programming Fundamentals Course",
+        "institution": "Yandex.Lyceum",
+        "period": "2020",
+        "description": "Python, OOP, working with libraries"
+      }
+    ],
+    "projects_title": "Projects",
+    "projects": [
+      {
+        "name": "Telegram Bot Platform",
+        "description": "Microservice platform for creating and managing Telegram bots with CRM functionality and asynchronous message processing",
+        "technologies": ["Python", "FastAPI", "Apache Kafka", "PostgreSQL", "Docker", "Nginx"],
+        "link": null
+      },
+      {
+        "name": "Personal Website & Server Infrastructure",
+        "description": "Self-hosted website with multiple services, SSL configuration, and reverse proxy setup",
+        "technologies": ["FastAPI", "Nginx", "Docker Compose", "Let's Encrypt"],
+        "link": "https://magallan.online"
+      }
+    ],
+    "social_title": "Connect With Me",
+    "languages_title": "Languages",
+    "languages": [
+      {"name": "Russian", "level": "Native"},
+      {"name": "English", "level": "B2 — Upper Intermediate"}
+    ]
+  },
+  "social": {
+    "github": "omegamagallan",
+    "telegram": "@omegamagallan",
+    "website": "https://dev.magallan.online/"
+  }
+}
