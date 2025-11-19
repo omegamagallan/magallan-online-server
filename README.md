@@ -1,6 +1,6 @@
-# Magallan Portfolio - Personal Job Card Website
+# Personal Job Card Website
 
-A professional personal portfolio/job card website built with FastAPI and Jinja2 templates, designed to run at dev.magallan.online.
+A professional personal portfolio/job card website built with FastAPI and Jinja2 templates, designed to run at [dev.magallan.online](https://dev.magallan.online)
 
 ## Features
 
