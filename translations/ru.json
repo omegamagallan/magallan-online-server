@@ -1,5 +1,5 @@
 {
-  "site_title": "Портфолио - Алексеева Мегаллан",
+  "site_title": "ssh mag@localhost",
   "portfolio": "Портфолио",
   "home": "Главная",
   "dark_mode": "Тёмная тема",
@@ -81,7 +81,7 @@
         "name": "Личный сайт и серверная инфраструктура",
         "description": "Самостоятельно размещённый сайт с множеством сервисов, настройкой SSL и реверс-прокси",
         "technologies": ["FastAPI", "Nginx", "Docker Compose", "Let's Encrypt"],
-        "link": "https://magallan.online"
+        "link": "https://github.com/omegamagallan/magallan-online-server"
       }
     ],
     "social_title": "Связаться со мной",

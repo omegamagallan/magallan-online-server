@@ -1,5 +1,5 @@
 {
-  "site_title": "Portfolio - Magallan Alekseeva",
+  "site_title": "ssh mag@localhost",
   "portfolio": "Portfolio",
   "home": "Home",
   "dark_mode": "Dark Mode",
@@ -81,7 +81,7 @@
         "name": "Personal Website & Server Infrastructure",
         "description": "Self-hosted website with multiple services, SSL configuration, and reverse proxy setup",
         "technologies": ["FastAPI", "Nginx", "Docker Compose", "Let's Encrypt"],
-        "link": "https://magallan.online"
+        "link": "https://github.com/omegamagallan/magallan-online-server"
       }
     ],
     "social_title": "Connect With Me",
